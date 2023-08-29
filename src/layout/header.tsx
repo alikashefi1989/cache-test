@@ -34,6 +34,10 @@ const HeaderWrapper = styled.div(() => ({
     justifyContent: 'flex-start',
     alignItems: 'center',
     gap: '15px',
+    position: 'fixed',
+    top: 0,
+    left: 0,
+    backgroundColor: 'black',
 }))
 
 interface PathLinkProps {

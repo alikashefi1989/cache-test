@@ -6,7 +6,7 @@ interface Props { }
 const Home = forwardRef((_: Props, ref: any) => {
 
     return (
-        <div id='Home-ref' ref={ref}>Home</div>
+        <div id='Home-ref' ref={ref}></div>
     )
 })
 

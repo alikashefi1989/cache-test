@@ -13,8 +13,9 @@ interface LayoutProps {
 }
 
 const Layout: FC<LayoutProps> = ({ children }) => {
+    const wrapperRef = useRef<HTMLDivElement>(null)
     const ref = useRef<HTMLDivElement>()
-    useView(ref)
+    useView(wrapperRef)
 
     return (
         <>
@@ -26,7 +27,7 @@ const Layout: FC<LayoutProps> = ({ children }) => {
                     }
                 }}
             />
-            <LayoutWrapper id='main-layout'>
+            <LayoutWrapper id='main-layout' ref={wrapperRef}>
                 <Header />
                 {cloneElement(children, { ref: ref })}
             </LayoutWrapper>
@@ -39,9 +40,10 @@ export default Layout
 const LayoutWrapper = styled.div(() => ({
     boxSizing: 'border-box',
     width: '100%',
-    height: '100vh',
+    minHeight: '100vh',
     padding: 0,
     margin: 0,
+    paddingTop: '75px',
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'flex-start',
@@ -50,13 +52,13 @@ const LayoutWrapper = styled.div(() => ({
     color: 'white',
 }))
 
-const useView = (ref: React.MutableRefObject<HTMLDivElement | undefined>) => {
+const useView = (ref: React.MutableRefObject<HTMLDivElement | null>) => {
     const { pathname } = useLocation()
 
-    console.log('useView', pathname, ref.current?.id) // get and save
+    console.log('useView', pathname, ref.current?.scrollHeight) // get and save
 
     useLayoutEffect(() => {
-        console.log('useLayoutEffect', pathname, ref.current?.id) // get anf set
+        console.log('useLayoutEffect', pathname, ref.current?.scrollHeight) // get anf set
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [pathname])
 }
